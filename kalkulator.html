@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    
+  </style>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Pintar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script>
+    // Fungsi untuk menghitung operasi matematika dasar
+    function hitung() {
+      var angka1 = parseFloat(document.getElementById('kalkulator').value);
+      var angka2 = parseFloat(document.getElementById('angka').value);
+      var operator = document.getElementById('operator').value;
+      var hasil = 0;
+
+      // Lakukan operasi sesuai dengan operator yang dipilih
+      if (operator === '+') {
+        hasil = angka1 + angka2;
+      } else if (operator === '-') {
+        hasil = angka1 - angka2;
+      } else if (operator === '*') {
+        hasil = angka1 * angka2;
+      } else if (operator === '/') {
+        hasil = angka2 !== 0 ? angka1 / angka2 : "Tidak dapat membagi dengan nol";
+      } else if (operator === 'sin') {
+        hasil = hitungSinus();
+      } else if (operator === 'cos') {
+        hasil = hitungCosinus();
+      } else if (operator === 'log') {
+        hasil = hitungLogaritma();
+      } else if (operator === 'exp') {
+        hasil = hitungEksponensial();
+      } else if (operator === 'sqrt') {
+        hasil = hitungAkarKuadrat();
+      } else if (operator === 'abs') {
+        hasil = hitungNilaiMutlak();
+      } else if (operator === 'ceil') {
+        hasil = hitungPembulatanAtas();
+      } else if (operator === 'floor') {
+        hasil = hitungPembulatanBawah();
+      } else if (operator === 'pow') {
+        hasil = hitungPangkat();
+      } else if (operator === 'cbrt') {
+        hasil = hitungAkarKubik();
+      } else if (operator === 'tan') {
+        hasil = hitungTanjung();
+      } else if (operator === 'round') {
+        hasil = hitungPembulatan();
+      } else if (operator === 'min') {
+        hasil = hitungNilaiMinimum();
+      } else if (operator === 'max') {
+        hasil = hitungNilaiMaksimum();
+      } else if (operator === 'random') {
+        hasil = hitungRandom();
+      } else if (operator === 'sign') {
+        hasil = hitungTanda();
+      }
+
+      document.getElementById('hasil').innerHTML = 'Hasil: ' + hasil;
+      jelaskanHasil(hasil);
+    }
+
+    function jelaskanHasil(hasil) {
+      var penjelasan = '';
+      if (!isNaN(hasil)) {
+        penjelasan = 'Hasilnya adalah ' + hasil + '. Ini adalah hasil dari operasi matematika yang Anda lakukan.';
+      } else {
+        penjelasan = hasil;
+      }
+      document.getElementById('penjelasan').innerHTML = penjelasan;
+    }
+
+    // Fungsi matematika tambahan
+
+    function hitungTanjung() {
+      var angle = parseFloat(document.getElementById('kalkulator').value);
+      var tangen = Math.tan(angle * (Math.PI / 180));
+      return tangen.toFixed(4);
+    }
+
+    function hitungPembulatan() {
+      var bilangan = parseFloat(document.getElementById('kalkulator').value);
+      var pembulatan = Math.round(bilangan);
+      return pembulatan.toFixed(4);
+    }
+
+    function hitungNilaiMinimum() {
+      var angka1 = parseFloat(document.getElementById('kalkulator').value);
+      var angka2 = parseFloat(document.getElementById('angka').value);
+      var min = Math.min(angka1, angka2);
+      return min.toFixed(4);
+    }
+
+    function hitungNilaiMaksimum() {
+      var angka1 = parseFloat(document.getElementById('kalkulator').value);
+      var angka2 = parseFloat(document.getElementById('angka').value);
+      var max = Math.max(angka1, angka2);
+      return max.toFixed(4);
+    }
+
+    function hitungRandom() {
+      var random = Math.random();
+      return random.toFixed(4);
+    }
+
+    function hitungTanda() {
+      var angka = parseFloat(document.getElementById('kalkulator').value);
+      var sign = Math.sign(angka);
+      return sign;
+    }
+    
+    function resetFields() {
+  document.getElementById('number1').value = '';
+  document.getElementById('number2').value = '';
+  document.getElementById('operator').selectedIndex = 0;
+  document.getElementById('hasil').innerHTML = '';
+  document.getElementById('penjelasan').innerHTML = '';
+}
+    // Tambahkan fungsi matematika tambahan lainnya di sini
+
+  </script>
+</head>
+<body>
+    <div class="container mt-5">
+    <!-- Elemen tombol Bootstrap --
+  <!-- Form untuk input kalkulator -->
+  <fieldset class="container mt-5">
+    <legend style="text-align:center;">Kalkulator</legend>
+    <div class="input-group mb-3">
+      <div class="input-group-text">
+    <label for="kalkulator">Bilangan 1:</label>
+    <input class="form-control" type="number" id="kalkulator" name="kalkulator" />
+    </div>
+    </div>
+    <br>
+     <div class="input-group mb-3">
+      <div class="input-group-text">
+     <label for="angka">Bilangan 2:</label>
+     <input class="form-control" type="number" id="angka" name="angka" />
+     </div>
+    </div>
+    <br>
+    <label for="operator">Pilih operasi:</label>
+    <select id="operator" class="form-select" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+      <option value="+">Tambah (+)</option>
+      <option value="-">Kurang (-)</option>
+      <option value="*">Kali (*)</option>
+      <option value="/">Bagi (/)</option>
+      <option value="sin">Sinus (sin)</option>
+      <option value="cos">Cosinus (cos)</option>
+      <option value="log">Logaritma Basis 10 (log)</option>
+      <option value="exp">Eksponensial (exp)</option>
+      <option value="sqrt">Akar Kuadrat (sqrt)</option>
+      <option value="abs">Nilai Mutlak (abs)</option>
+      <option value="ceil">Pembulatan Atas (ceil)</option>
+      <option value="floor">Pembulatan Bawah (floor)</option>
+      <option value="pow">Pangkat (pow)</option>
+      <option value="cbrt">Akar Kubik (cbrt)</option>
+      <option value="tan">Tangen (tan)</option>
+      <option value="round">Pembulatan (round)</option>
+      <option value="min">Nilai Minimum (min)</option>
+      <option value="max">Nilai Maksimum (max)</option>
+      <option value="random">Bilangan Acak (random)</option>
+      <option value="sign">Tanda (sign)</option>
+      <!-- Tambahkan opsi baru untuk fungsi matematika tambahan lainnya -->
+    </select>
+    <br><br>
+    <!-- Elemen tombol Bootstrap -->
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button type="button" class="btn btn-outline-primary" onclick="hitung()">Hitung</button>
+       <button type="button" class="btn btn-outline-primary" onclick="bagikanPesan()">Bagikan Pesan di WhatsApp</button>
+        <button type="button" class="btn btn-outline-danger" onclick="resetFields()">reset</button>
+        </div>
+    <br><br>
+    <div id="hasil"></div> <!-- Menampilkan hasil perhitungan -->
+    <div id="penjelasan"></div> <!-- Menampilkan penjelasan hasil -->
+  </fieldset>
+  </div>
+    <script src="js.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+    // Fungsi untuk mengirim pesan ke WhatsApp
+    function bagikanPesan() {
+      var penjelasan = document.getElementById('penjelasan').innerText; // Dapatkan teks penjelasan
+
+      var message = encodeURIComponent(penjelasan); // Enkode pesan
+
+      // Ganti nomor tujuan dengan nomor WhatsApp yang ingin Anda kirimi pesan
+      var phoneNumber = '6281234567890'; // Ganti dengan nomor telepon penerima
+
+      var url = 'https://api.whatsapp.com/send?phone=' + phoneNumber + '&text=' + message; // URL WhatsApp API
+
+      // Buka WhatsApp di browser untuk mengirim pesan
+      window.open(url);
+    }
+  </script>
+</body>
+</html>
